@@ -15,4 +15,11 @@ class Database {
   Stream<QuerySnapshot> getItems() {
     return _db.collection('Tsasounat').snapshots();
   }
+
+  Stream<QuerySnapshot> saveFormItem(String name, String year, String county) {
+    _db
+        .collection('Tsasounat')
+        .doc()
+        .set({'name': name, 'year': year, 'county': county});
+  }
 }
