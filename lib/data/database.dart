@@ -16,7 +16,7 @@ class Database {
     return _db.collection('Tsasounat').snapshots();
   }
 
-  Stream<QuerySnapshot> saveFormItem(String name, String year, String county) {
+  void saveFormItem(String name, String year, String county) {
     _db
         .collection('Tsasounat')
         .doc()
