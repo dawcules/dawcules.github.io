@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dummy_add_tsasouna.dart';
+import 'tsasouna_map.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key, this.title, this.documents}) : super(key: key);
@@ -70,6 +71,15 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => DummyForm()),
+                    );
+                  },
+                ),
+                RaisedButton(
+                  child: Text('Kartta'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TsasounaMap()),
                     );
                   },
                 ),
