@@ -10,7 +10,7 @@ class DummyForm extends StatefulWidget {
 
 class _DummyFormState extends State<DummyForm> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  bool _obscurePassword;
+  //bool _obscurePassword;
   //TextEditingController _emailController;
   TextEditingController _nameController;
   TextEditingController _yearController;
@@ -21,7 +21,7 @@ class _DummyFormState extends State<DummyForm> {
   @override
   void initState() {
     super.initState();
-    _obscurePassword = true;
+    //_obscurePassword = true;
     //_emailController = TextEditingController();
     _nameController = TextEditingController();
     _yearController = TextEditingController();
@@ -147,7 +147,7 @@ class _DummyFormState extends State<DummyForm> {
     return null;
   }
 
-  String _validateEmail(String value) {
+/*   String _validateEmail(String value) {
     if (value == null || value == '') {
       return 'Syötä sähköpostiosoite';
     }
@@ -159,7 +159,7 @@ class _DummyFormState extends State<DummyForm> {
       return 'Enter valid email address';
     }
     return null;
-  }
+  } */
 
   void _validateFormAndSubmit() {
     // Get form state from the global key
