@@ -16,10 +16,19 @@ class Database {
     return _db.collection('Tsasounat').snapshots();
   }
 
-  void saveFormItem(String name, String year, String county) {
-    _db
-        .collection('Tsasounat')
-        .doc()
-        .set({'name': name, 'year': year, 'county': county});
+  void saveFormItem(
+    String name,
+    String year,
+    String county,
+    String long,
+    String lat,
+  ) {
+    _db.collection('Tsasounat').doc().set({
+      'name': name,
+      'year': year,
+      'county': county,
+      'long': long,
+      'lat': lat
+    });
   }
 }

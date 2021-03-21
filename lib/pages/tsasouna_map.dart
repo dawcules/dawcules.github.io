@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 //LatLng(60.41699, 24.31965);
 
 class TsasounaMap extends StatelessWidget {
+  TsasounaMap({Key key, this.documents}) : super(key: key);
+
+  final documents;
+
   @override
   Widget build(BuildContext context) {
     return getMap();
@@ -34,48 +38,32 @@ class TsasounaMap extends StatelessWidget {
       Map<int, Marker> markers = {};
       Map<int, InfoWindow> windows = {};
 
-      var contentString1 = '<div id="content">' +
-          '<div id="siteNotice">' +
-          '</div>' +
-          '<h1 id="firstHeading" class="firstHeading">Vihti</h1>' +
-          '<div id="bodyContent">' +
-          '<img src=' +
-          'https://www.vihti.fi/wp-content/uploads/2016/02/Vaakuna_nettiin.jpg>' +
-          '<p><b>Vihti</b>, Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque tincidunt nunc nec nibh laoreet pretium. Phasellus rhoncus luctus enim ut venenatis. Nullam laoreet bibendum ipsum ut efficitur. Curabitur in cursus erat, et pharetra felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam volutpat tellus eu leo pulvinar porta.</p>' +
-          '<p>Kunnan sivut, <a href="https://www.vihti.fi/">' +
-          'https://www.vihti.fi/</a> ' +
-          '</p>' +
-          '</div>' +
-          '</div>';
+      //List<String> contentStrings = [];
 
-      var contentString2 = '<div id="content">' +
-          '<div id="siteNotice">' +
-          '</div>' +
-          '<h1 id="firstHeading" class="firstHeading">Espoo</h1>' +
-          '<div id="bodyContent">' +
-          '<img src=' +
-          'https://www.espoo.fi/download/noname/%7B5ED4D8D7-2E24-456A-B591-F43911B80DF0%7D/86009>' +
-          '<p><b>Espoo</b>, Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque tincidunt nunc nec nibh laoreet pretium. Phasellus rhoncus luctus enim ut venenatis. Nullam laoreet bibendum ipsum ut efficitur. Curabitur in cursus erat, et pharetra felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam volutpat tellus eu leo pulvinar porta.</p>' +
-          '<p>Kunnan sivut, <a href="https://www.espoo.fi/">' +
-          'https://www.espoo.fi/</a> ' +
-          '</p>' +
-          '</div>' +
-          '</div>';
-
-      var contentStrings = List(2);
-      contentStrings[0] = contentString1;
-      contentStrings[1] = contentString2;
-
+      print('PITUUS: ' + documents.docs.length.toString());
       Set<Marker>.of(markers.values);
       var i = 0;
-      while (i < 2) {
+      while (i < documents.docs.length) {
         markers[i] = Marker(MarkerOptions()
-          ..position = LatLng((60.41699 + i), 24.31965)
+          ..position = LatLng((double.parse(documents.docs[i]['long'])),
+              double.parse(documents.docs[i]['lat']))
           ..map = map
           ..title = i.toString());
         var titleNum = int.parse(markers[i].title);
-        windows[i] = InfoWindow(
-            InfoWindowOptions()..content = contentStrings[i].toString());
+        windows[i] = InfoWindow(InfoWindowOptions()
+          ..content = '<div id="content">' +
+              '<div id="siteNotice">' +
+              '</div>' +
+              '<h1 id="firstHeading" class="firstHeading">${documents.docs[i]['county']}</h1>' +
+              '<div id="bodyContent">' +
+              '<img src=' +
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tsasouna_Muhos.jpg/480px-Tsasouna_Muhos.jpg>' +
+              '<p><b>${documents.docs[i]['county']}</b>, Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque tincidunt nunc nec nibh laoreet pretium. Phasellus rhoncus luctus enim ut venenatis. Nullam laoreet bibendum ipsum ut efficitur. Curabitur in cursus erat, et pharetra felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam volutpat tellus eu leo pulvinar porta.</p>' +
+              '<p>Kunnan sivut, <a href="https://www.espoo.fi/">' +
+              'https://www.espoo.fi/</a> ' +
+              '</p>' +
+              '</div>' +
+              '</div>');
         markers[i].onClick.listen((event) {
           print(titleNum);
           windows[titleNum].open(map, markers[titleNum]);

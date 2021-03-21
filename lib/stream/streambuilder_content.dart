@@ -12,8 +12,7 @@ class StreamBuilderContent extends StatelessWidget {
             print(snapshot.error);
           }
           if (!snapshot.hasData) return const Text('Loading..');
-          return MainPage(
-              title: 'Tsasouna Web!', documents: snapshot.data.documents[0]);
+          return MainPage(title: 'Tsasouna Web!', documents: snapshot.data);
         });
   }
 }

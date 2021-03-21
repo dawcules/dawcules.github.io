@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'dummy_add_tsasouna.dart';
 import 'tsasouna_map.dart';
@@ -42,30 +44,38 @@ class _MainPageState extends State<MainPage> {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
-                  widget.documents['name'],
+                  widget.documents.docs[0]['name'],
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Rakennusvuosi: ' + widget.documents['year'],
+                  'Rakennusvuosi: ' + widget.documents.docs[0]['year'],
                   style: TextStyle(fontSize: 28),
                 ),
                 Text(
-                  'Paikkakunta: ' + widget.documents['county'],
+                  'Paikkakunta: ' + widget.documents.docs[0]['county'],
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text(
+                  'Pituusaste: ' +
+                      widget.documents.docs[0]['long']
+                          .toString()
+                          .substring(0, 7) +
+                      '°',
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text(
+                  'Leveysaste: ' +
+                      widget.documents.docs[0]['lat']
+                          .toString()
+                          .substring(0, 7) +
+                      '°',
                   style: TextStyle(fontSize: 28),
                 ),
                 Text(
                   'Lisätietorivi tiedoilla',
                   style: TextStyle(fontSize: 28),
                 ),
-                Text(
-                  'Lisätietorivi tiedoilla',
-                  style: TextStyle(fontSize: 28),
-                ),
-                Text(
-                  'Lisätietorivi tiedoilla',
-                  style: TextStyle(fontSize: 28),
-                ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text('Lomake'),
                   onPressed: () {
                     Navigator.push(
@@ -74,12 +84,14 @@ class _MainPageState extends State<MainPage> {
                     );
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text('Kartta'),
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TsasounaMap()),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              TsasounaMap(documents: widget.documents)),
                     );
                   },
                 ),
