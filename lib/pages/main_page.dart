@@ -84,6 +84,7 @@ class _MainPageState extends State<MainPage> {
                     );
                   },
                 ),
+                Padding(padding: EdgeInsets.all(8)),
                 ElevatedButton(
                   child: Text('Kartta'),
                   onPressed: () {
